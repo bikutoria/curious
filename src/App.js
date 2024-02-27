@@ -1,10 +1,15 @@
-// src/App.js
 import React, { useState } from 'react';
+import { useSwipeable } from 'react-swipeable';
 import './App.css';
 import questions from './questions';
 
 function App() {
   const [index, setIndex] = useState(0);
+
+  const handlers = useSwipeable({
+    onSwipedLeft: () => navigateQuestion('next'),
+    onSwipedRight: () => navigateQuestion('prev'),
+  });
 
   // Function to get a random question index
   const getRandomIndex = () => {
@@ -24,10 +29,8 @@ function App() {
 
   return (
     <div className="App">
-      <div className="card">
+      <div {...handlers} className="card">
         <p>{questions[index]}</p>
-        <button onClick={() => navigateQuestion('prev')}>Previous</button>
-        <button onClick={() => navigateQuestion('next')}>Next</button>
       </div>
     </div>
   );
