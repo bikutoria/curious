@@ -1,15 +1,9 @@
-import React, { useState } from 'react';
-import { useSwipeable } from 'react-swipeable';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import questions from './questions';
 
 function App() {
   const [index, setIndex] = useState(0);
-
-  const handlers = useSwipeable({
-    onSwipedLeft: () => navigateQuestion('next'),
-    onSwipedRight: () => navigateQuestion('prev'),
-  });
 
   // Function to get a random question index
   const getRandomIndex = () => {
@@ -27,10 +21,31 @@ function App() {
     setIndex(newIndex);
   };
 
+  // Handle keyboard events
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'ArrowRight') {
+        navigateQuestion('next');
+      } else if (event.key === 'ArrowLeft') {
+        navigateQuestion('prev');
+      }
+    };
+
+    // Add event listener for keydown
+    window.addEventListener('keydown', handleKeyDown);
+
+    // Cleanup function to remove event listener
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [index]); // Depend on index to ensure the effect is correctly applied after index updates
+
   return (
     <div className="App">
-      <div {...handlers} className="card">
+      <div className="card">
         <p>{questions[index]}</p>
+        <button onClick={() => navigateQuestion('prev')}>Previous</button>
+        <button onClick={() => navigateQuestion('next')}>Next</button>
       </div>
     </div>
   );
