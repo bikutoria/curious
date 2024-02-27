@@ -1,54 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useSwipeable } from 'react-swipeable';
 import './App.css';
 import questions from './questions';
 
 function App() {
-  const [index, setIndex] = useState(0);
+    const [index, setIndex] = useState(0);
 
-  // Function to get a random question index
-  const getRandomIndex = () => {
-    let randomIndex = Math.floor(Math.random() * questions.length);
-    // Ensure the new random index is different from the current index
-    while (randomIndex === index) {
-      randomIndex = Math.floor(Math.random() * questions.length);
-    }
-    return randomIndex;
-  };
-
-  // Navigate to a new question
-  const navigateQuestion = (direction) => {
-    const newIndex = direction === 'next' ? getRandomIndex() : getRandomIndex();
-    setIndex(newIndex);
-  };
-
-  // Handle keyboard events
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === 'ArrowRight') {
-        navigateQuestion('next');
-      } else if (event.key === 'ArrowLeft') {
-        navigateQuestion('prev');
-      }
+    // Function to go to the next question
+    const nextQuestion = () => {
+        setIndex(prevIndex => (prevIndex + 1) % questions.length); // Loop back to the first question at the end
     };
 
-    // Add event listener for keydown
-    window.addEventListener('keydown', handleKeyDown);
+    // Handlers for swipe gestures
+    const handlers = useSwipeable({
+        onSwipedLeft: () => nextQuestion(), // Go to next question on swipe left
+        onSwipedRight: () => nextQuestion(), // Go to next question on swipe right
+    });
 
-    // Cleanup function to remove event listener
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [index]); // Depend on index to ensure the effect is correctly applied after index updates
-
-  return (
-    <div className="App">
-      <div className="card">
-        <p>{questions[index]}</p>
-        <button onClick={() => navigateQuestion('prev')}>Previous</button>
-        <button onClick={() => navigateQuestion('next')}>Next</button>
-      </div>
-    </div>
-  );
+    return (
+        <div className="App">
+            <div {...handlers} className="card">
+                <p>{questions[index]}</p>
+            </div>
+        </div>
+    );
 }
 
 export default App;
