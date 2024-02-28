@@ -23,7 +23,6 @@
   margin: 50px;
   overflow: hidden;
   user-select: none;
-  font-size: 80px;
 }
 
 .card p {
@@ -31,7 +30,7 @@
   font-optical-sizing: auto;
   font-weight: 200;
   font-style: normal;
-  font-size: 40px;
+  font-size: 30px;
   text-align: center;
 }
 

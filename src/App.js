@@ -24,8 +24,8 @@ function App() {
     };
 
     const handlers = useSwipeable({
-        onSwipedLeft: () => nextQuestion(),
-        onSwipedRight: () => prevQuestion(),
+        onSwipedLeft: () => prevQuestion(),
+        onSwipedRight: () => nextQuestion(),
     });
 
     useEffect(() => {
