@@ -55,9 +55,9 @@
 }
 
 .animate-next {
-  animation: animate-next 300ms forwards;
+  animation: animate-next 500ms forwards;
 }
 
 .animate-prev {
-  animation: animate-prev 300ms forwards;
+  animation: animate-prev 500ms forwards;
 }
