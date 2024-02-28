@@ -15,7 +15,7 @@
   background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 25px;
-  border: 1px solid #E8E6EA;
+  border: 1px solid #cdcccd;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,19 +24,18 @@
   overflow: hidden;
   user-select: none;
   font-size: 80px;
-  /* Prevent user from selecting text to improve swipe experience */
 }
 
 .card p {
   font-family: "Noto Sans", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 100;
+  font-weight: 200;
   font-style: normal;
   font-size: 40px;
   text-align: center;
 }
 
-/* Existing styles remain unchanged */
+/* Animation */
 
 @keyframes animate-next {
   from {
