@@ -5,24 +5,29 @@ import questions from './questions';
 
 function App() {
     const [index, setIndex] = useState(0);
+    const [animationClass, setAnimationClass] = useState('');
 
-    // Function to go to the next question
     const nextQuestion = () => {
-        setIndex((prevIndex) => (prevIndex + 1) % questions.length); // Loop back to the first question at the end
+        setAnimationClass('animateSwipeRight'); // Set class for swipe right animation
+        setTimeout(() => {
+            setIndex((prevIndex) => (prevIndex + 1) % questions.length);
+            setAnimationClass(''); // Reset class to remove animation
+        }, 500); // Timeout matches animation duration
     };
 
-    // Function to go to the previous question
     const prevQuestion = () => {
-        setIndex((prevIndex) => (prevIndex - 1 + questions.length) % questions.length); // Loop to the last question if at the first
+        setAnimationClass('animateSwipeLeft'); // Set class for swipe left animation
+        setTimeout(() => {
+            setIndex((prevIndex) => (prevIndex - 1 + questions.length) % questions.length);
+            setAnimationClass(''); // Reset class to remove animation
+        }, 500); // Timeout matches animation duration
     };
 
-    // Handlers for swipe gestures
     const handlers = useSwipeable({
-        onSwipedLeft: () => nextQuestion(), // Go to next question on swipe left
-        onSwipedRight: () => prevQuestion(), // Go to previous question on swipe right
+        onSwipedLeft: () => prevQuestion(),
+        onSwipedRight: () => nextQuestion(),
     });
 
-    // Handle keyboard events for left and right arrow keys
     useEffect(() => {
         const handleKeyDown = (event) => {
             if (event.key === 'ArrowRight') {
@@ -34,15 +39,14 @@ function App() {
 
         window.addEventListener('keydown', handleKeyDown);
 
-        // Cleanup function to remove the event listener
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
-    }, [index]); // This effect depends on index to ensure the callback has the current state
+    }, []); // Removed index dependency to prevent re-binding
 
     return (
         <div className="App">
-            <div {...handlers} className="card">
+            <div {...handlers} className={`card ${animationClass}`}>
                 <p>{questions[index]}</p>
             </div>
         </div>
