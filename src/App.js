@@ -8,24 +8,24 @@ function App() {
     const [animationClass, setAnimationClass] = useState('');
 
     const nextQuestion = () => {
-        setAnimationClass('animateSwipeRight'); // Set class for swipe right animation
+        setAnimationClass('animate-next');
         setTimeout(() => {
             setIndex((prevIndex) => (prevIndex + 1) % questions.length);
-            setAnimationClass(''); // Reset class to remove animation
-        }, 500); // Timeout matches animation duration
+            setAnimationClass('');
+        }, 300); // timeout duration should match the animation duration
     };
 
     const prevQuestion = () => {
-        setAnimationClass('animateSwipeLeft'); // Set class for swipe left animation
+        setAnimationClass('animate-prev');
         setTimeout(() => {
             setIndex((prevIndex) => (prevIndex - 1 + questions.length) % questions.length);
-            setAnimationClass(''); // Reset class to remove animation
-        }, 500); // Timeout matches animation duration
+            setAnimationClass('');
+        }, 300); // timeout duration should match the animation duration
     };
 
     const handlers = useSwipeable({
-        onSwipedLeft: () => prevQuestion(),
-        onSwipedRight: () => nextQuestion(),
+        onSwipedLeft: () => nextQuestion(),
+        onSwipedRight: () => prevQuestion(),
     });
 
     useEffect(() => {
@@ -42,7 +42,7 @@ function App() {
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
-    }, []); // Removed index dependency to prevent re-binding
+    }, [index]);
 
     return (
         <div className="App">

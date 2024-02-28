@@ -28,7 +28,9 @@
   text-align: center;
 }
 
-@keyframes swipeRight {
+/* Existing styles remain unchanged */
+
+@keyframes animate-next {
   from {
     transform: rotate(0deg);
     opacity: 1;
@@ -40,7 +42,7 @@
   }
 }
 
-@keyframes swipeLeft {
+@keyframes animate-prev {
   from {
     transform: rotate(0deg);
     opacity: 1;
@@ -50,4 +52,12 @@
     transform: rotate(-40deg) translateY(-80px);
     opacity: 0;
   }
+}
+
+.animate-next {
+  animation: animate-next 300ms forwards;
+}
+
+.animate-prev {
+  animation: animate-prev 300ms forwards;
 }
