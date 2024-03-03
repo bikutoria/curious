@@ -5,14 +5,10 @@ body {
     margin: 0;
     padding: 0;
     font-family: "Open Sans", sans-serif;
-    /* Centralizes the font family */
     background-color: #f7f5f2;
-    /* Sets a consistent background color */
-    color: #1f2127;
-    /* Centralizes the font color */
+    color: #333;
 }
 
-/* App and Welcome Screen */
 .App,
 .welcome-screen {
     display: flex;
@@ -22,68 +18,21 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    font-family: "Open Sans", sans-serif;
 }
 
-/* Welcome Screen Heading */
 .welcome-screen h2 {
     display: block;
 }
 
-/* Input Groups for the Welcome Screen */
-.input-group {
-    margin-bottom: 15px;
-}
-
-.input-group label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-/* Range Sliders */
-input[type="range"] {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 250px;
-    height: 10px;
-    background: #9D98A6;
-    outline: none;
-    opacity: 0.5;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 25px;
-    height: 25px;
-    background: #5e5681;
-}
-
-input[type="range"]::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    background: #5e5681;
-}
-
-/* Submit Button */
-button {
-    padding: 15px 25px;
-    cursor: pointer;
-    font-family: "Open Sans", sans-serif;
-    font-weight: 700;
-    background: #C5BCC2;
-    border-radius: 15px;
-    border-style: none;
-}
-
-/* Card Styles */
 .card {
     width: 295px;
     height: 450px;
     position: relative;
-    background-color: #fafafa;
-    box-shadow: 0 4px 8px rgba(157, 152, 166, 0.2);
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 25px;
-    border: 1px solid #fafafa;
+    border: 1px solid #f3f3f3;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -98,12 +47,12 @@ button {
     font-optical-sizing: auto;
     font-weight: 200;
     font-style: normal;
-    font-size: 35px;
+    font-size: 30px;
     text-align: center;
-    color: #1f2127;
 }
 
-/* Animation Keyframes */
+/* Animation */
+
 @keyframes animate-next {
     from {
         transform: rotate(0deg);
@@ -128,11 +77,51 @@ button {
     }
 }
 
-/* Animation Classes */
 .animate-next {
     animation: animate-next 500ms forwards;
 }
 
 .animate-prev {
     animation: animate-prev 500ms forwards;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-family: "Open Sans", sans-serif;
+}
+
+/* Sliders */
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 250px;
+    height: 10px;
+    background: #c3a8bd;
+    outline: none;
+    opacity: 0.5;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #5e5681;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #5e5681;
 }

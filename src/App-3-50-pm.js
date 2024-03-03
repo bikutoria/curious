@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import './App.css';
 import questions from './questions';
 
 function App() {
     const [index, setIndex] = useState(0);
-    const [showWelcomeScreen, setShowWelcomeScreen] = useState(true);
+    const [showWelcomeScreen, setShowWelcomeScreen] = useState(true); // State to toggle welcome screen
     const [animationClass, setAnimationClass] = useState('');
 
-    // Function to advance to the next question
     const nextQuestion = () => {
         setAnimationClass('animate-next');
         setTimeout(() => {
@@ -17,7 +16,6 @@ function App() {
         }, 300); // Match timeout duration with animation duration
     };
 
-    // Function to go back to the previous question
     const prevQuestion = () => {
         setAnimationClass('animate-prev');
         setTimeout(() => {
@@ -31,22 +29,7 @@ function App() {
         onSwipedRight: () => prevQuestion(),
     });
 
-    useEffect(() => {
-        const handleKeyDown = (event) => {
-            if (event.key === 'ArrowRight') {
-                nextQuestion();
-            } else if (event.key === 'ArrowLeft') {
-                prevQuestion();
-            }
-        };
-
-        window.addEventListener('keydown', handleKeyDown);
-
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-        };
-    }, [index]); // Ensures the effect is updated if the index changes
-
+    // Handle submission of the welcome screen form
     const handleSubmit = (event) => {
         event.preventDefault();
         setShowWelcomeScreen(false);
