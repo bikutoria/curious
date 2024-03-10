@@ -1,4 +1,3 @@
-// src/components/Card.js
 import React from 'react';
 
 const Card = ({ question }) => {

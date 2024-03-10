@@ -5,13 +5,9 @@ body {
     margin: 0;
     padding: 7%;
     font-family: "Open Sans", sans-serif;
-    /* Centralizes the font family */
     background-color: #ede7e7;
-    /* Sets a consistent background color */
     /* animation: colorFade 20s infinite; */
     color: #1f2127;
-    /* Centralizes the font color */
-
 }
 
 @keyframes colorFade {
@@ -21,17 +17,14 @@ body {
         background-color: #ffeafa;
     }
 
-    /* Start and end with Color 1 */
     33% {
         background-color: #e4e9ff;
     }
 
-    /* Transition to Color 2 */
     66% {
         background-color: #e7fffe;
     }
 
-    /* Transition to Color 3 */
 }
 
 /* App and Welcome Screen */

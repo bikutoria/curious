@@ -1,4 +1,3 @@
-// src/analytics.js
 import amplitude from 'amplitude-js';
 
 export const initializeAmplitude = () => {

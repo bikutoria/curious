@@ -36,27 +36,23 @@ function App() {
     }, [showWelcomeScreen]);
 
     const nextQuestion = () => {
-        // Capture the current question before updating the index
         const currentQuestionText = questions[index];
         setAnimationClass('animate-next');
         setTimeout(() => {
             const newIndex = (index + 1) % questions.length;
             setIndex(newIndex);
             setAnimationClass('');
-            // Track the event with the current (pre-navigation) question
             trackEvent('Next Question', { questionIndex: index, questionText: currentQuestionText });
         }, 700);
     };
 
     const prevQuestion = () => {
-        // Capture the current question before updating the index
         const currentQuestionText = questions[index];
         setAnimationClass('animate-prev');
         setTimeout(() => {
             const newIndex = (index - 1 + questions.length) % questions.length;
             setIndex(newIndex);
             setAnimationClass('');
-            // Track the event with the current (pre-navigation) question
             trackEvent('Previous Question', { questionIndex: index, questionText: currentQuestionText });
         }, 700);
     };

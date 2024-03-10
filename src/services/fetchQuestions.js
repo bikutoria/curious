@@ -1,6 +1,3 @@
-// src/services/fetchQuestions.js
-// here, we fetch questions from the Google Sheets file
-
 import Papa from 'papaparse';
 
 export const fetchQuestions = async () => {
