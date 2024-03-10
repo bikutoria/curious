@@ -3,9 +3,7 @@ import { useSwipeable } from 'react-swipeable';
 import './App.css';
 import { fetchQuestions } from './services/fetchQuestions';
 import { shuffleArray } from './services/shuffle';
-import { trackEvent, initializeAmplitude } from './analytics/amplitude';
-import WelcomeScreen from './components/WelcomeScreen';
-import Card from './components/Card';
+import { initializeAmplitude, trackEvent } from './analytics/amplitude';
 
 function App() {
     const [index, setIndex] = useState(0);
@@ -28,43 +26,32 @@ function App() {
             if (!showWelcomeScreen && shuffledQuestions.length > 0) {
                 trackEvent('Cards Page View');
             }
-            console.log("loadQuestions triggered inside useEffect");
         };
 
         loadQuestions();
-        console.log("loadQuestions triggered outside useEffect");
     }, [showWelcomeScreen]);
 
     const nextQuestion = () => {
-        // Capture the current question before updating the index
-        const currentQuestionText = questions[index];
         setAnimationClass('animate-next');
         setTimeout(() => {
-            const newIndex = (index + 1) % questions.length;
-            setIndex(newIndex);
+            setIndex((prevIndex) => (prevIndex + 1) % questions.length);
             setAnimationClass('');
-            // Track the event with the current (pre-navigation) question
-            trackEvent('Next Question', { questionIndex: index, questionText: currentQuestionText });
         }, 700);
+        trackEvent('Next Question');
     };
 
     const prevQuestion = () => {
-        // Capture the current question before updating the index
-        const currentQuestionText = questions[index];
         setAnimationClass('animate-prev');
         setTimeout(() => {
-            const newIndex = (index - 1 + questions.length) % questions.length;
-            setIndex(newIndex);
+            setIndex((prevIndex) => (prevIndex - 1 + questions.length) % questions.length);
             setAnimationClass('');
-            // Track the event with the current (pre-navigation) question
-            trackEvent('Previous Question', { questionIndex: index, questionText: currentQuestionText });
         }, 700);
+        trackEvent('Previous Question');
     };
 
-
     const handlers = useSwipeable({
-        onSwipedLeft: () => nextQuestion(),
-        onSwipedRight: () => prevQuestion(),
+        onSwipedLeft: () => prevQuestion(),
+        onSwipedRight: () => nextQuestion(),
     });
 
     useEffect(() => {
@@ -85,7 +72,6 @@ function App() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log("Submit clicked");
         const inputs = {
             haveFun: document.getElementById('have-fun').value,
             shareInsights: document.getElementById('share-insights').value,
@@ -95,15 +81,34 @@ function App() {
         setShowWelcomeScreen(false);
     };
 
+    if (showWelcomeScreen) {
+        return (
+            <div className="welcome-screen">
+                <h2>What is our intent for tonight?</h2>
+                <form onSubmit={handleSubmit}>
+                    <div className="input-group">
+                        <label htmlFor="have-fun">Have fun</label>
+                        <input type="range" id="have-fun" name="haveFun" min="1" max="5" defaultValue="3" />
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="share-insights">Share personal insights</label>
+                        <input type="range" id="share-insights" name="shareInsights" min="1" max="5" defaultValue="3" />
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="explore-dynamics">Explore relationship dynamics</label>
+                        <input type="range" id="explore-dynamics" name="exploreDynamics" min="1" max="5" defaultValue="3" />
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        );
+    }
+
     return (
         <div className="App">
-            {showWelcomeScreen ? (
-                <WelcomeScreen onSubmit={handleSubmit} />
-            ) : (
-                <div {...handlers} className={`card ${animationClass}`}>
-                    <Card question={questions.length > 0 ? questions[index] : 'Loading...'} />
-                </div>
-            )}
+            <div {...handlers} className={`card ${animationClass}`}>
+                <p>{questions.length > 0 ? questions[index] : 'Loading...'}</p>
+            </div>
         </div>
     );
 }

@@ -3,13 +3,35 @@
 /* Global styles */
 body {
     margin: 0;
-    padding: 0;
+    padding: 7%;
     font-family: "Open Sans", sans-serif;
     /* Centralizes the font family */
-    background-color: #f7f5f2;
+    background-color: #ede7e7;
     /* Sets a consistent background color */
+    /* animation: colorFade 20s infinite; */
     color: #1f2127;
     /* Centralizes the font color */
+
+}
+
+@keyframes colorFade {
+
+    0%,
+    100% {
+        background-color: #ffeafa;
+    }
+
+    /* Start and end with Color 1 */
+    33% {
+        background-color: #e4e9ff;
+    }
+
+    /* Transition to Color 2 */
+    66% {
+        background-color: #e7fffe;
+    }
+
+    /* Transition to Color 3 */
 }
 
 /* App and Welcome Screen */
@@ -21,7 +43,7 @@ body {
     padding: 20px;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /* border: 2px solid red; */
 }
 
 /* Welcome Screen Heading */
@@ -77,18 +99,18 @@ button {
 
 /* Card Styles */
 .card {
-    width: 295px;
+    max-width: 295px;
     height: 450px;
     position: relative;
     background-color: #fafafa;
-    box-shadow: 0 4px 8px rgba(157, 152, 166, 0.2);
+    box-shadow: 0 4px 8px rgba(157, 152, 166, 0.3);
     border-radius: 25px;
     border: 1px solid #fafafa;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 50px;
-    margin: 50px;
+    margin: 0px;
     overflow: hidden;
     user-select: none;
 }
@@ -130,9 +152,9 @@ button {
 
 /* Animation Classes */
 .animate-next {
-    animation: animate-next 500ms forwards;
+    animation: animate-next 700ms forwards;
 }
 
 .animate-prev {
-    animation: animate-prev 500ms forwards;
+    animation: animate-prev 700ms forwards;
 }
