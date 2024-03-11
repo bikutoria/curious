@@ -7,5 +7,3 @@ export const shuffleArray = (array) => {
   }
   return shuffledArray;
 };
-
-console.log("Shuffle triggered");

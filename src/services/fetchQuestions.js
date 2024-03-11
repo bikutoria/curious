@@ -19,5 +19,3 @@ export const fetchQuestions = async () => {
         return [];
     }
 };
-
-console.log("Questions fetched");
