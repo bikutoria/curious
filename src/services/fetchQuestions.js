@@ -11,8 +11,14 @@ export const fetchQuestions = async () => {
             skipEmptyLines: true,
         });
 
-        // Assuming your questions are in a column named 'Question'
-        const questions = result.data.map(row => row.Text);
+        // Map each row to an object containing the ID, question Text, and Familiarity
+        // Replace 'ID', 'Text', and 'Familiarity' with actual column names from your CSV
+        const questions = result.data.map(row => ({
+            id: row.ID,
+            text: row.Text,
+            familiarity: row.Familiarity
+        }));
+
         return questions;
     } catch (error) {
         console.error("Failed to fetch questions:", error);

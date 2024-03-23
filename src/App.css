@@ -80,6 +80,10 @@ button {
     border-style: none;
 }
 
+h2 {
+    padding: 15px 25px;
+}
+
 /* Card Styles */
 .card {
     /* max-width: 295px; */
@@ -141,4 +145,40 @@ button {
 
 .animate-prev {
     animation: animate-prev 700ms forwards;
+}
+
+/* new */
+
+/* Animation Keyframes */
+@keyframes animate-fwd {
+    from {
+        transform: rotate(0deg);
+        opacity: 1;
+    }
+
+    to {
+        transform: rotate(40deg) translateY(-80px);
+        opacity: 0;
+    }
+}
+
+@keyframes animate-back {
+    from {
+        transform: rotate(0deg);
+        opacity: 1;
+    }
+
+    to {
+        transform: rotate(-40deg) translateY(-80px);
+        opacity: 0;
+    }
+}
+
+/* Animation Classes */
+.animate-fwd {
+    animation: animate-fwd 700ms forwards;
+}
+
+.animate-back {
+    animation: animate-back 700ms forwards;
 }

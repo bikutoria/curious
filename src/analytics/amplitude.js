@@ -6,4 +6,5 @@ export const initializeAmplitude = () => {
 
 export const trackEvent = (eventName, eventData) => {
     amplitude.getInstance().logEvent(eventName, eventData);
+    console.log(eventName, eventData);
 };

@@ -14,7 +14,7 @@ const Card = () => {
             const shuffledQuestions = shuffleArray(fetchedQuestions);
             setQuestions(shuffledQuestions);
             if (shuffledQuestions.length > 0) {
-                trackEvent('Card Page View');
+                trackEvent('Card Page View', { questionID: shuffledQuestions[0].id });
             }
         })
     }, []);
@@ -22,9 +22,9 @@ const Card = () => {
     useEffect(() => {
         const handleKeyDown = (event) => {
             if (event.key === 'ArrowRight') {
-                nextQuestion();
+                Like();
             } else if (event.key === 'ArrowLeft') {
-                prevQuestion();
+                Dislike();
             }
         };
 
@@ -35,39 +35,39 @@ const Card = () => {
         };
     }, [index, questions.length]);
 
-    const nextQuestion = () => {
-        const currentQuestionText = questions[index];
-        setAnimationClass('animate-next');
+    const Like = () => {
+        const currentQuestion = questions[index];
+        setAnimationClass('animate-fwd');
         setTimeout(() => {
             const newIndex = (index + 1) % questions.length;
             setIndex(newIndex);
             setAnimationClass('');
-            trackEvent('Next Question', { questionIndex: index, questionText: currentQuestionText });
+            trackEvent('Next Question', { questionID: currentQuestion.id, score: '+1' });
         }, 700);
     };
 
-    const prevQuestion = () => {
-        const currentQuestionText = questions[index];
-        setAnimationClass('animate-prev');
+    const Dislike = () => {
+        const currentQuestion = questions[index];
+        setAnimationClass('animate-back');
         setTimeout(() => {
-            const newIndex = (index - 1 + questions.length) % questions.length;
+            const newIndex = (index + 1 + questions.length) % questions.length;
             setIndex(newIndex);
             setAnimationClass('');
-            trackEvent('Previous Question', { questionIndex: index, questionText: currentQuestionText });
+            trackEvent('Next Question', { questionID: currentQuestion.id, score: '-1' });
         }, 700);
     };
 
-
     const handlers = useSwipeable({
-        onSwipedLeft: () => prevQuestion(),
-        onSwipedRight: () => nextQuestion(),
+        onSwipedLeft: () => Dislike(),
+        onSwipedRight: () => Like(),
     });
 
     return (
         <div {...handlers} className={`card ${animationClass}`}>
-            <p>{questions.length > 0 ? questions[index] : 'Loading...'}</p>
+            {/* Ensure questions array is not empty and access the text property */}
+            <p>{questions.length > 0 ? questions[index].text : 'Loading...'}</p>
         </div>
-    )
+    );
 };
 
 export default Card;
