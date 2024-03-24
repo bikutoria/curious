@@ -62,10 +62,20 @@ const Card = () => {
         onSwipedRight: () => Like(),
     });
 
+    // return (
+    //     <div {...handlers} className={`card ${animationClass}`}>
+    //         {/* Ensure questions array is not empty and access the text property */}
+    //         <p>{questions.length > 0 ? questions[index].text : 'Loading...'}</p>
+    //     </div>
+    // );
+
     return (
         <div {...handlers} className={`card ${animationClass}`}>
-            {/* Ensure questions array is not empty and access the text property */}
-            <p>{questions.length > 0 ? questions[index].text : 'Loading...'}</p>
+            {questions.length > 0 ? (
+                <p>{questions[index].text}</p>
+            ) : (
+                <div className="loader"></div>
+            )}
         </div>
     );
 };

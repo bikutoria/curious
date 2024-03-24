@@ -6,9 +6,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #ede7e7;
+  background-color: #ffffff;
   /* animation: colorFade 20s infinite; */
-  color: #1f2127;
+  color: #232323;
 }
 
 code {

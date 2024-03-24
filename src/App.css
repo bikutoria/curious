@@ -1,22 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
-@keyframes colorFade {
-
-    0%,
-    100% {
-        background-color: #ffeafa;
-    }
-
-    33% {
-        background-color: #e4e9ff;
-    }
-
-    66% {
-        background-color: #e7fffe;
-    }
-
-}
-
 /* App and Welcome Screen */
 .App,
 .welcome-screen {
@@ -49,39 +32,55 @@ input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
     width: 250px;
-    height: 10px;
-    background: #9D98A6;
+    height: 6px;
+    background: #F3F3F3;
     outline: none;
-    opacity: 0.5;
+    opacity: 1;
+    border-radius: 10px;
 }
+
 
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 25px;
-    height: 25px;
-    background: #5e5681;
+    width: 27px;
+    height: 27px;
+    background: #E94057;
+    border: 3px solid #FFFFFF;
+    box-shadow: 0px 2px 4px rgba(233, 64, 87, 0.2);
+    border-radius: 50%;
+    box-sizing: border-box;
 }
 
 input[type="range"]::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    background: #5e5681;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 27px;
+    height: 27px;
+    background: #E94057;
+    border: 4px solid #FFFFFF;
+    box-shadow: 0px 2px 4px rgba(233, 64, 87, 0.2);
+    border-radius: 50%;
+    box-sizing: border-box;
 }
 
-/* Submit Button */
+/* Submit/Continue Button */
 button {
+    margin: 15px 15px;
     padding: 15px 25px;
+    width: 250px;
     cursor: pointer;
     font-family: "Open Sans", sans-serif;
     font-weight: 700;
-    background: #C5BCC2;
+    background: #E94057;
+    color: #FFFFFF;
     border-radius: 15px;
     border-style: none;
 }
 
 h2 {
-    padding: 15px 25px;
+    margin: 15px 15px;
+    width: 250px;
 }
 
 /* Card Styles */
@@ -91,7 +90,7 @@ h2 {
     height: 450px;
     position: relative;
     background-color: #fafafa;
-    box-shadow: 0 4px 8px rgba(157, 152, 166, 0.3);
+    box-shadow: 0 4px 8px rgba(157, 152, 166, 0.5);
     border-radius: 25px;
     border: 1px solid #fafafa;
     display: flex;
@@ -113,41 +112,41 @@ h2 {
     color: #1f2127;
 }
 
-/* Animation Keyframes */
-@keyframes animate-next {
-    from {
-        transform: rotate(0deg);
-        opacity: 1;
-    }
-
-    to {
-        transform: rotate(40deg) translateY(-80px);
-        opacity: 0;
-    }
+/* HTML: <div class="loader"></div> */
+.loader {
+    width: 100px;
+    aspect-ratio: 1;
+    display: grid;
+    -webkit-mask: conic-gradient(from 15deg, #0000, #000);
+    animation: l26 1s infinite steps(12);
 }
 
-@keyframes animate-prev {
-    from {
-        transform: rotate(0deg);
-        opacity: 1;
+.loader,
+.loader:before,
+.loader:after {
+    background:
+        radial-gradient(closest-side at 50% 12.5%,
+            #E94057 96%, #0000) 50% 0/20% 80% repeat-y,
+        radial-gradient(closest-side at 12.5% 50%,
+            #E94057 96%, #0000) 0 50%/80% 20% repeat-x;
+}
+
+.loader:before,
+.loader:after {
+    content: "";
+    grid-area: 1/1;
+    transform: rotate(30deg);
+}
+
+.loader:after {
+    transform: rotate(60deg);
+}
+
+@keyframes l26 {
+    100% {
+        transform: rotate(1turn)
     }
-
-    to {
-        transform: rotate(-40deg) translateY(-80px);
-        opacity: 0;
-    }
 }
-
-/* Animation Classes */
-.animate-next {
-    animation: animate-next 700ms forwards;
-}
-
-.animate-prev {
-    animation: animate-prev 700ms forwards;
-}
-
-/* new */
 
 /* Animation Keyframes */
 @keyframes animate-fwd {
