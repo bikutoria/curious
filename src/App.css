@@ -109,6 +109,8 @@ h2 {
     font-size: 30px;
     text-align: center;
     color: #333333;
+    line-height: 115%;
+    padding: 10px;
 }
 
 /* HTML: <div class="loader"></div> */
