@@ -25,7 +25,8 @@ const WelcomeScreen = ({ onSubmit }) => {
 
     return (
         <div className="welcome-screen">
-            <h2>What is your intent for tonight?</h2>
+            <h2>Set the intent.</h2>
+            <p>Start by choosing the mood you're going for - a fun night or a deeper connection - and we'll pick the perfect questions to get you there!</p>
             <form onSubmit={onSubmit}>
                 <div className="input-group">
                     <label htmlFor="have-fun">Have fun</label>
